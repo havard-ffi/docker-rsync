@@ -1,10 +1,12 @@
-FROM debian:jessie
-MAINTAINER David Stefan <stefda@gmail.com>
+FROM debian:stable-backports
+MAINTAINER Håvard Stien <havard.stien@ffi.no>
 
-RUN apt-get update && \
-  DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends rsync && \
-  apt-get clean autoclean && \
-  apt-get autoremove -y && \
+ENV TZ=Europe/Oslo
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt update && \
+   apt install -yq --no-install-recommends rsync && \
+  apt clean autoclean && \
+  apt autoremove -y && \
   rm -rf /var/lib/apt/lists/*
 
 EXPOSE 873
